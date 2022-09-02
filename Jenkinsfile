@@ -31,7 +31,7 @@ pipeline{
 
     stage('Deploy to K8s') {
       steps{
-        sh 'git clone https://github.com/dberenguerdevcenter/kubernetes-helm-docker-config.git configuracion --branch demo-java'
+        sh 'git clone https://github.com/dberenguerdevcenter/kubernetes-helm-docker-config.git configuracion --branch demo-angular'
         sh 'kubectl apply -f configuracion/kubernetes-deployments/angular-14-app/deployment.yaml --kubeconfig=configuracion/kubernetes-config/config'
       }
     }
