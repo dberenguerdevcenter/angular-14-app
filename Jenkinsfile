@@ -7,7 +7,9 @@ pipeline{
   }
 
   environment {
-    DOCKERHUB_CREDENTIALS=credentials('docker-credentials')
+    registryCredential='docker-credentials'
+    registryFrontend = 'franaznarteralco/frontend-demo'
+
   }
 
   stages {
@@ -20,7 +22,7 @@ pipeline{
     stage('Push Image to Docker Hub') {
       steps {
         script {
-          dockerImage = docker.build registryBackend + ":$BUILD_NUMBER"
+          dockerImage = docker.build registryFrontend + ":$BUILD_NUMBER"
           docker.withRegistry( '', registryCredential) {
             dockerImage.push()
           }
