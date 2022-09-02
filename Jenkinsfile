@@ -7,9 +7,8 @@ pipeline{
   }
 
   environment {
-    registryCredential='docker-credentials'
+    registryCredential='docker-hub-credentials'
     registryFrontend = 'franaznarteralco/frontend-demo'
-
   }
 
   stages {
