@@ -6,11 +6,6 @@ pipeline{
     }
   }
 
-  environment {
-    registryCredential='docker-hub-credentials'
-    registryFrontend = 'franaznarteralco/frontend-demo'
-  }
-
   stages {
     node {
       stage('SonarQube analysis') {
@@ -21,9 +16,4 @@ pipeline{
     }
   }
 
-  post {
-    always {
-      sh 'docker logout'
-    }
-  }
 }
