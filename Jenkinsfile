@@ -2,7 +2,7 @@ pipeline{
 
   agent {
     node {
-      label 'nodo-nodejs'
+      label 'node-nodejs'
     }
   }
 
