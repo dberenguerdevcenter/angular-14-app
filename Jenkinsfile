@@ -8,8 +8,10 @@ pipeline{
 
   stages {
     stage('SonarQube analysis') {
-      withSonarQubeEnv(credentialsId: 'sonarqube-credentials', installationName: 'My SonarQube Server') { // You can override the credential to be used
-        sh 'npm run sonar'
+      steps {
+        withSonarQubeEnv(credentialsId: 'sonarqube-credentials', installationName: 'My SonarQube Server') { // You can override the credential to be used
+          sh 'npm run sonar'
+        }
       }
     }
   }
