@@ -7,9 +7,18 @@ pipeline{
   }
 
   stages {
+
+      stage('NPM build') {
+        steps {
+          script {
+            sh 'npm run build'
+          }
+        }
+      }
+
     stage('SonarQube analysis') {
       steps {
-        script { // You can override the credential to be used
+        script {
           sh 'npm run sonar'
         }
       }
