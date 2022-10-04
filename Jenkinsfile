@@ -8,13 +8,13 @@ pipeline{
 
   stages {
 
-      stage('NPM build') {
-        steps {
-          script {
-            sh 'npm run build'
-          }
+    stage('NPM build') {
+      steps {
+        script {
+          sh 'npm run build'
         }
       }
+    }
 
     stage('SonarQube analysis') {
       steps {
