@@ -19,12 +19,12 @@ pipeline{
 
     stage('SonarQube analysis') {
       steps {
-//         withSonarQubeEnv(credentialsId: "sonarqube-credentials", installationName: "sonarqube-server"){
+        withSonarQubeEnv(installationName: "sonarqube-server"){
           sh 'npm run sonar'
-//         }
-//         timeout(time: 10, unit: "MINUTES") {
-//           waitForQualityGate abortPipeline: true
-//         }
+        }
+        timeout(time: 10, unit: "MINUTES") {
+          waitForQualityGate abortPipeline: true
+        }
       }
     }
 
