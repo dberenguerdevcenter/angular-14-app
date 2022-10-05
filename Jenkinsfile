@@ -19,15 +19,12 @@ pipeline{
 
     stage('SonarQube analysis') {
       steps {
-        script {
+        withSonarQubeEnv("sonarqube-server"){
           sh 'npm run sonar'
         }
-      }
-    }
-
-    stage('Quality Gate') {
-      steps {
-        waitForQualityGate abortPipeline: true
+        timeout(time: 10, unit: "MINUTES") {
+          waitForQualityGate abortPipeline: true
+        }
       }
     }
 
