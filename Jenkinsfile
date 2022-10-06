@@ -1,5 +1,4 @@
 pipeline{
-
   agent {
     node {
       label 'node-nodejs'
@@ -7,7 +6,6 @@ pipeline{
   }
 
   stages {
-
     stage('NPM build') {
       steps {
         script {
@@ -16,7 +14,6 @@ pipeline{
         }
       }
     }
-
     stage('SonarQube analysis') {
       steps {
         withSonarQubeEnv(credentialsId: "sonarqube-credentials", installationName: "sonarqube-server"){
@@ -24,7 +21,6 @@ pipeline{
         }
       }
     }
-
     stage('Quality Gate') {
       steps {
         timeout(time: 10, unit: "MINUTES") {
@@ -37,7 +33,5 @@ pipeline{
         }
       }
     }
-
   }
-
 }
