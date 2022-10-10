@@ -40,6 +40,7 @@ pipeline{
   post {
     always {
       sh 'docker logout'
+      sh 'rm -r configuracion'
     }
   }
 }
