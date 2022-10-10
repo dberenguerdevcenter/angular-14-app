@@ -22,7 +22,6 @@ pipeline{
       steps {
         script {
           dockerImage = docker.build registryFrontend + ":$BUILD_NUMBER"
-          dockerImage = docker.build registryFrontend + ":latest"
           docker.withRegistry( '', registryCredential) {
             dockerImage.push()
           }
@@ -33,7 +32,6 @@ pipeline{
     stage('Push Image latest to Docker Hub') {
       steps {
         script {
-          dockerImage = docker.build registryFrontend + ":$BUILD_NUMBER"
           dockerImage = docker.build registryFrontend + ":latest"
           docker.withRegistry( '', registryCredential) {
             dockerImage.push()
