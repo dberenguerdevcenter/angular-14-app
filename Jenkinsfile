@@ -32,7 +32,7 @@ pipeline{
     stage('Deploy to K8s') {
       steps{
         sh 'git clone https://github.com/dberenguerdevcenter/kubernetes-helm-docker-config.git configuracion --branch demo-angular'
-        sh 'kubectl apply -f configuracion/kubernetes-deployments/angular-14-app/manifest.yml --kubeconfig=configuracion/kubernetes-config/config'
+        sh 'kubectl apply -f configuracion/kubernetes-deployment/angular-14-app/manifest.yml --kubeconfig=configuracion/kubernetes-config/config'
       }
     }
   }
@@ -40,7 +40,6 @@ pipeline{
   post {
     always {
       sh 'docker logout'
-      sh 'rm -r configuracion'
     }
   }
 }
