@@ -64,11 +64,11 @@ pipeline{
     stage('Deploy to K8s') {
 
       steps{
-
-        if(fileExists("configuracion")){
-          sh 'rm -r configuracion'
+        script {
+          if(fileExists("configuracion")){
+            sh 'rm -r configuracion'
+          }
         }
-
         sh 'git clone https://github.com/dberenguerdevcenter/kubernetes-helm-docker-config.git configuracion --branch demo-angular'
         sh 'kubectl apply -f configuracion/kubernetes-deployment/angular-14-app/manifest.yml -n default --kubeconfig=configuracion/kubernetes-config/config'
       }
