@@ -12,54 +12,54 @@ pipeline{
   }
 
   stages {
-    stage('Build') {
-      steps {
-        sh 'npm install && npm run build'
-      }
-    }
-
-    stage('SonarQube analysis') {
-      steps {
-        withSonarQubeEnv(credentialsId: "sonarqube-credentials", installationName: "sonarqube-server"){
-          sh 'npm run sonar'
-        }
-      }
-    }
-
-    stage('Quality Gate') {
-      steps {
-        timeout(time: 10, unit: "MINUTES") {
-          script {
-            def qg = waitForQualityGate()
-            if (qg.status != 'OK') {
-               error "Pipeline aborted due to quality gate failure: ${qg.status}"
-            }
-          }
-        }
-      }
-    }
-
-    stage('Push Image to Docker Hub') {
-      steps {
-        script {
-          dockerImage = docker.build registryFrontend + ":$BUILD_NUMBER"
-          docker.withRegistry( '', registryCredential) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-
-    stage('Push Image latest to Docker Hub') {
-      steps {
-        script {
-          dockerImage = docker.build registryFrontend + ":latest"
-          docker.withRegistry( '', registryCredential) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
+//     stage('Build') {
+//       steps {
+//         sh 'npm install && npm run build'
+//       }
+//     }
+//
+//     stage('SonarQube analysis') {
+//       steps {
+//         withSonarQubeEnv(credentialsId: "sonarqube-credentials", installationName: "sonarqube-server"){
+//           sh 'npm run sonar'
+//         }
+//       }
+//     }
+//
+//     stage('Quality Gate') {
+//       steps {
+//         timeout(time: 10, unit: "MINUTES") {
+//           script {
+//             def qg = waitForQualityGate()
+//             if (qg.status != 'OK') {
+//                error "Pipeline aborted due to quality gate failure: ${qg.status}"
+//             }
+//           }
+//         }
+//       }
+//     }
+//
+//     stage('Push Image to Docker Hub') {
+//       steps {
+//         script {
+//           dockerImage = docker.build registryFrontend + ":$BUILD_NUMBER"
+//           docker.withRegistry( '', registryCredential) {
+//             dockerImage.push()
+//           }
+//         }
+//       }
+//     }
+//
+//     stage('Push Image latest to Docker Hub') {
+//       steps {
+//         script {
+//           dockerImage = docker.build registryFrontend + ":latest"
+//           docker.withRegistry( '', registryCredential) {
+//             dockerImage.push()
+//           }
+//         }
+//       }
+//     }
 
     stage('Deploy to K8s') {
 
@@ -78,7 +78,7 @@ pipeline{
 
   post {
     always {
-      sh 'docker logout'
+//       sh 'docker logout'
     }
   }
 }
