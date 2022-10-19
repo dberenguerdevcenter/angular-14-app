@@ -9,4 +9,4 @@ Tutorial Application in that:
 
 ![angular-14-crud-example](angular-14-crud-example.png)
 
-Run `ng serve --port 8081` for a dev server. Navigate to `http://localhost:8082/`. The app will automatically reload if you change any of the source files.
+Run `ng serve --port 8081` for a dev server. Navigate to `http://spring-boot-app.default:8082/`. The app will automatically reload if you change any of the source files.
